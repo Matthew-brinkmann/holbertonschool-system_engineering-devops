@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "cleaning folder"
+rm *~
+echo "Running checker"
+file -i -m test *
