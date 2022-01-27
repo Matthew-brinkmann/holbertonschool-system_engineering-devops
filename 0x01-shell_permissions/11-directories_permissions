@@ -1,2 +1,2 @@
 #!/bin/bash
-find /path/to/location -type d -print0 |xargs -0 chmod ugo+x
+find /path/to/location -type d -print0 |xargs -0 chmod 751
