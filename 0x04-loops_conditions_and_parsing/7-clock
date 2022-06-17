@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# This script is just a fun numer counter display which countires find numbers unlucky
+hour="0"
+minute="1"
+while [ "$hour" -le 12 ]
+do
+    minute="1"
+    echo $"Hour: $hour"
+    while [ "$minute" -le 59 ]
+    do
+	echo $minute
+	minute=$((minute+1))
+    done
+    hour=$((hour+1))
+done
