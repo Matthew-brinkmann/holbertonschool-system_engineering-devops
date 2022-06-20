@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # will display "too infinity and beyond" infinately
+# and like christopher lambert, will yell I am Invincible
 trap "echo 'I am invincible!!!'" SIGTERM
 while true; do
       echo "To infinity and beyond"
