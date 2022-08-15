@@ -8,7 +8,7 @@
 
 OLD_STRING="server_name _;"
 NEW_STRING="\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;"
-NEW_ERROR="\terror_page 404 /404notfound.html;"
+NEW_ERROR="\terror_page 404 /Http404.html;"
 apt-get -y update
 apt-get -y upgrade
 apt-get -y install nginx
@@ -22,6 +22,6 @@ fi
 echo "Hello World" >> /var/www/html/index.html
 # Put in the redirect for /redirect_me
 sudo sed -i "/$OLD_STRING/a\\$NEW_STRING" /etc/nginx/sites-available/default
-echo "Ceci n'est pas une page" >> /var/www/html/404notfound.html
+echo "Ceci n'est pas une page" >> /var/www/html/Http404.html
 sudo sed -i "/$OLD_STRING/a\\$NEW_ERROR" /etc/nginx/sites-available/default
 service nginx restart
