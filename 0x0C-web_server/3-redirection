@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Install nginx web server
+#+ Install nginx
+#+ Nginx should be listening on port 80
+#+ When querying Nginx at its root / with a GET request (requesting a page) using curl, it must return a page that contains the string Hello World
+#+ You can’t use systemctl for restarting nginx
+#+ /redirect_me will redirect to youtube.
+
+OLD_STRING="server_name _;"
+NEW_STRING="\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;"
+apt-get -y update
+apt-get -y upgrade
+apt-get -y install nginx
+service nginx start
+# delete default index file.
+if [[ -f /var/www/html/index.nginx-debian.html ]]
+then
+    sudo rm /var/www/html/index.nginx-debian.html
+fi
+# put in new index file with Hello World (plus shorted name)
+sudo sh -c 'echo "Hello World" >> /var/www/html/index.html'
+# Put in the redirect for /redirect_me
+sudo sed -i "/$OLD_STRING/a\\$NEW_STRING" /etc/nginx/sites-available/default
+sudo service nginx restart

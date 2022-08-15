@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Install nginx web server
+#+ Install nginx
+#+ Nginx should be listening on port 80
+#+ When querying Nginx at its root / with a GET request (requesting a page) using curl, it must return a page that contains the string Hello World
+#+ You can’t use systemctl for restarting nginx
+
+apt-get -y update
+apt-get -y upgrade
+apt-get -y install nginx
+service nginx start
+# delete default index file.
+if [[ -f /var/www/html/index.nginx-debian.html ]]
+then
+    sudo rm /var/www/html/index.nginx-debian.html
+fi
+# put in new index file with Hello World (plus shorted name)
+sudo sh -c 'echo "Hello World" >> /var/www/html/index.html'
