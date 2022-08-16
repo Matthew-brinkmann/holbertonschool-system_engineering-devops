@@ -25,15 +25,16 @@ file { 'school':
   require =>  Exec['rm'],
 }
 
-exec { 'sed':
-  command  => 'sed -i "/server_name _;/a\\\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default',
-  onlyif   => 'test -e /etc/nginx/sites-available/default',
-  provider => 'shell',
-  require  =>  File['school'],
+file_line { 'redirection':
+  ensure  => present,
+  path    => '/etc/nginx/sites-available/default',
+  line    => '\tserver_name _;\n\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
+  match   => 'server_name _;',
+  require => File['school'],
 }
 
 exec { 'nginx restart':
   command  => 'service nginx restart',
   provider => 'shell',
-  require  =>  Exec['sed'],
+  require  =>  File_line['redirection'],
 }
