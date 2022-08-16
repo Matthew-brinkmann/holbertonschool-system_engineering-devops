@@ -19,7 +19,7 @@ file { '/var/www/html/index.nginx-debian.html':
 file { 'school':
   path    => '/var/www/html/index.html',
   mode    => '0644',
-  content => 'Hellow World',
+  content => 'Hello World',
   require =>  File['/var/www/html/index.nginx-debian.html'],
 }
 
