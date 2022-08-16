@@ -11,18 +11,16 @@ exec { 'nginx start':
   require  =>  Package['nginx'],
 }
 
-exec { 'rm':
-  command  => 'rm /var/www/html/index.nginx-debian.html',
-  onlyif   => 'test -e /var/www/html/index.nginx-debian.html',
-  provider => 'shell',
-  require  =>  Exec['nginx start'],
+file { '/var/www/html/index.nginx-debian.html':
+  ensure  => absent,
+  require =>  Exec['nginx start'],
 }
 
 file { 'school':
   path    => '/var/www/html/index.html',
   mode    => '0644',
   content => 'Hellow World',
-  require =>  Exec['rm'],
+  require =>  File['/var/www/html/index.nginx-debian.html'],
 }
 
 file_line { 'redirection':
