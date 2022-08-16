@@ -23,12 +23,19 @@ file { 'school':
   require =>  File['/var/www/html/index.nginx-debian.html'],
 }
 
+file { 'error404':
+  path    => '/var/www/html/Http404.html',
+  mode    => '0644',
+  content => "Ceci n'est pas une page",
+  require =>  File['school'],
+}
+
 file_line { 'redirection':
   ensure  => present,
   path    => '/etc/nginx/sites-available/default',
   line    => "\tserver_name _;\n\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;",
   match   => 'server_name _;',
-  require => File['school'],
+  require => File['error404'],
 }
 
 file_line { 'redirectionerror':
