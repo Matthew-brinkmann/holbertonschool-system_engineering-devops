@@ -31,8 +31,16 @@ file_line { 'redirection':
   require => File['school'],
 }
 
+file_line { 'redirectionerror':
+  ensure  => present,
+  path    => '/etc/nginx/sites-available/default',
+  line    => "\tserver_name _;\n\terror_page 404 /Http404.html;",
+  match   => 'server_name _;',
+  require => File_line['redirection'],
+}
+
 exec { 'nginx restart':
   command  => 'service nginx restart',
   provider => 'shell',
-  require  =>  File_line['redirection'],
+  require  =>  File_line['redirectionerror'],
 }
