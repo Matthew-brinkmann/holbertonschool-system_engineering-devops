@@ -14,7 +14,7 @@ exec { 'rm':
 file { 'school':
   path    => '/var/www/html/index.html',
   mode    => '0644',
-  content => 'Hellow World\n',
+  content => 'Hellow World',
 }
 
 exec { 'sed':
