@@ -8,14 +8,14 @@ package { 'nginx':
 exec { 'nginx start':
   command  => 'service nginx start',
   provider => 'shell',
-  require =>  Package['nginx'],
+  require  =>  Package['nginx'],
 }
 
 exec { 'rm':
   command  => 'rm /var/www/html/index.nginx-debian.html',
   onlyif   => 'test -e /var/www/html/index.nginx-debian.html',
   provider => 'shell',
-  require =>  Exec['nginx start'],
+  require  =>  Exec['nginx start'],
 }
 
 file { 'school':
@@ -27,13 +27,13 @@ file { 'school':
 
 exec { 'sed':
   command  => 'sed -i "/server_name _;/a\\\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default',
-  onlyif => 'test -e /etc/nginx/sites-available/default',
+  onlyif   => 'test -e /etc/nginx/sites-available/default',
   provider => 'shell',
-  require =>  File['school'],
+  require  =>  File['school'],
 }
 
 exec { 'nginx restart':
   command  => 'service nginx restart',
   provider => 'shell',
-  require =>  Exec['sed'],
+  require  =>  Exec['sed'],
 }
