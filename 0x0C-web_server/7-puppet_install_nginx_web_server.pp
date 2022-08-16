@@ -28,7 +28,7 @@ file { 'school':
 file_line { 'redirection':
   ensure  => present,
   path    => '/etc/nginx/sites-available/default',
-  line    => '\tserver_name _;\n\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
+  line    => "\tserver_name _;\n\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;",
   match   => 'server_name _;',
   require => File['school'],
 }
