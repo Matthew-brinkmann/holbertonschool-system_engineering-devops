@@ -1,4 +1,3 @@
-
 # install and configure an Nginx server using Puppet. perform a 301 redirect when querying /redirect_me.
 # strings to set up redirect_me.
 
