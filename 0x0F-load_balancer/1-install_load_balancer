@@ -11,8 +11,8 @@ frontend haproxynode
 backend app-main
         balance roundrobin
         option forwardfor
-	server 4329-web-01 52.204.151.72 check
-	server 4329-web-02 3.90.36.230 check
+	server 4329-web-01 52.204.151.72:80 check
+	server 4329-web-02 3.90.36.230:80 check
 "
 sudo apt-get -y update
 sudo apt-get -y upgrade
