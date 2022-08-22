@@ -49,7 +49,7 @@ file_line { 'redirectionerror':
 file_line { 'servedheader':
   ensure  => present,
   path    => '/etc/nginx/sites-available/default',
-  line    => "\tserver_name _;\n\tadd_header X-Served-By <%= @hostname %>;",
+  line    => "\tserver_name _;\n\tadd_header X-Served-By ${hostname};",
   match   => 'server_name _;',
   require => File_line['redirectionerror'],
 }
