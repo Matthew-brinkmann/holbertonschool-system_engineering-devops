@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# nstall and configure HAproxy
+# Distribute requests using a roundrobin algorithm
+# Make sure that HAproxy can be managed via an init script
+CONFIG_OPTIONS="
+frontend haproxynode
+        bind *:80
+        mode http
+        default_backend app-main
+
+backend app-main
+        balance roundrobin
+        option forwardfor
+	server 4329-web-01 52.204.151.72 check
+	server 4329-web-02 3.90.36.230 check
+"
+sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get -y install haproxy
+sudo cp -a /etc/haproxy/haproxy.cfg{,.orig}
+printf "%s" "$CONFIG_OPTIONS" >> /etc/haproxy/haproxy.cfg
+sudo service haproxy start
