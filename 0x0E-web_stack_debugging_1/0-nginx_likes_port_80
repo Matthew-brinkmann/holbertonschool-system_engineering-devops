@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Fix: Ubuntu sandbox’s Nginx installation to listening on port 80
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+service nginx restart
