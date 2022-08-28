@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Bash script that runs dig on a bun of domains and returns a string
+
+if [ -z "$2" ]; then
+    # will execute if no second argument passed
+    for subdomain in "www" "lb-01" "web-01" "web-02"
+    do
+        LINETOPRINT=$(dig "$subdomain.$1" | grep -A1 "ANSWER SECTION:")
+        echo $LINETOPRINT | awk '{printf  "The subdomain %s is a %s record and points to %s\n", DOM, $7, $8}' DOM="$subdomain"
+    done
+else
+    LINETOPRINT=$(dig "$2.$1" | grep -A1 "ANSWER SECTION:")
+    echo $LINETOPRINT | awk '{printf "The subdomain %s is a %s record and points to %s\n", DOM, $7, $8}' DOM="$2"
+fi
