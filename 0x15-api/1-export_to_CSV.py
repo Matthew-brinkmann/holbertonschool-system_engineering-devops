@@ -155,7 +155,7 @@ class UserControlObject:
 
     def writeToCSVFileRows(self, csvWriter):
         """Will write each line to a CSV file"""
-        userName = self.currentUserInformation.get('name')
+        userName = self.currentUserInformation.get('username')
         for task in self.currentUserTodoList:
             csvWriter.writerow([self.currentSelectedUser,
                                 userName,
