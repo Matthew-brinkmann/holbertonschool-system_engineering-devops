@@ -8,8 +8,7 @@ def recurse(subreddit, hot_list=[], count=0, after=None):
     hot articles in a subreddit. Done recursively.
     None if not a valid subreddit"""
     if subreddit is None or not type(str):
-        print(None)
-        return
+        return (None)
 
     apiUrlToCall = "http://www.reddit.com/r/{}/hot.json".format(subreddit)
     headersToCall = {"User-Agent":
@@ -29,8 +28,8 @@ def recurse(subreddit, hot_list=[], count=0, after=None):
     else:
         for singlePost in allPosts:
             hot_list.append(singlePost.
-                     get('data', {}).
-                     get('title'))
+                            get('data', {}).
+                            get('title'))
     if after is None:
         if len(hot_list) == 0:
             return None
@@ -38,4 +37,3 @@ def recurse(subreddit, hot_list=[], count=0, after=None):
     else:
         count = len(hot_list)
         return recurse(subreddit, hot_list, count, after)
-
