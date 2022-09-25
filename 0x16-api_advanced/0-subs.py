@@ -15,7 +15,8 @@ def number_of_subscribers(subreddit):
     headersToCall = {"User-Agent":
                      "Python3:School_Project:v1.0 (by /u/theHilariousMrcbtdx)"}
     apiRequest = requests.get(apiUrlToCall,
-                              headers=headersToCall).json()
+                              headers=headersToCall,
+                              verify=False).json()
     totalSubs = apiRequest.get("data", {}).get("subscribers", 0)
 
     return (totalSubs)
