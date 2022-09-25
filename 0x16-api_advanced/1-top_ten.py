@@ -21,7 +21,7 @@ def top_ten(subreddit):
                               verify=False,
                               params=requestOptions).json()
     allPosts = apiRequest.get("data", {}).get("children", 0)
-    if allPosts is None:
+    if allPosts is None or apiRequest.get("error") == 404:
         print(None)
     else:
         for singlePost in allPosts:
