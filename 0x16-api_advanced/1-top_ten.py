@@ -9,7 +9,7 @@ def top_ten(subreddit):
     None if not a valid subreddit"""
 
     if subreddit is None or not type(str):
-        print (None)
+        print(None)
         return
 
     apiUrlToCall = "http://www.reddit.com/r/{}/hot.json".format(subreddit)
@@ -26,4 +26,4 @@ def top_ten(subreddit):
     else:
         for singlePost in allPosts:
             print(singlePost.get('data', {}).
-                             get('title'))
+                  get('title'))
