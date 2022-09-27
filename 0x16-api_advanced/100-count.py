@@ -15,13 +15,12 @@ def count_words(subreddit, word_list, after=None, print_dict={}):
     if subreddit is None or not type(str):
         return (None)
 
-    apiUrlToCall = "http://www.reddit.com/r/{}/hot.json".format(subreddit)
+    apiUrlToCall = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     headersToCall = {"User-Agent":
                      "Python3:School_Project:v1.0 (by /u/theHilariousMrcbtdx)"}
     requestOptions = {"after": after}
     apiRequest = requests.get(apiUrlToCall,
                               headers=headersToCall,
-                              verify=False,
                               params=requestOptions).json()
     allPosts = apiRequest.get("data", {}).get("children", 0)
     after = apiRequest.get('data', {}).get('after', None)
