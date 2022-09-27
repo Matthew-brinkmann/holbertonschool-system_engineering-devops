@@ -64,8 +64,8 @@ def search_title_for_words(title, word_list, print_dict):
     for word in word_list:
         for titleWord in titleAsWordArray:
             if word.lower() == titleWord.lower():
-                if word in print_dict.keys():
-                    print_dict[word] += 1
+                if word.lower() in print_dict.keys():
+                    print_dict[word.lower()] += 1
                 else:
-                    print_dict[word] = 1
+                    print_dict[word.lower()] = 1
     return (print_dict)
