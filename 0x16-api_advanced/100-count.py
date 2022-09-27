@@ -64,7 +64,7 @@ def search_title_for_words(title, word_list, print_dict):
     titleAsWordArray = title.split()
     for word in word_list:
         for titleWord in titleAsWordArray:
-            if word == titleWord:
+            if word.lower() == titleWord.lower():
                 if word in print_dict.keys():
                     print_dict[word] += 1
                 else:
